@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { View, Text, Image, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, Image, StyleSheet, ImageBackground, ScrollView } from 'react-native';
 import Onboarding from '../../components/Onboarding';
 import SvgExample from '../../components/svgExample';
 import { StatusBar } from 'expo-status-bar';
@@ -42,7 +42,7 @@ export default function ImpactsScreen({ navigation }) {
       };        
     return (
             <ImageBackground source={require('../../assets/voluntree_background_edited.png')} style={styles.backgroundImage}>
-            <View style={styles.container}>
+            <ScrollView contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}>
                <View style={styles.svgContainer}>
                     <SvgExample />
                     {renderTrees(10)}
@@ -54,16 +54,14 @@ export default function ImpactsScreen({ navigation }) {
                     <Text style={styles.tipSubText}> Apples are oranges </Text>
                 </View>
                <StatusBar style="auto" />
-            </View>
+            </ScrollView>
             </ImageBackground>
     );
  }
 
  const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+        justifyContent: 'center'
     },
     treeImage: {
       position: 'absolute',
@@ -75,18 +73,18 @@ export default function ImpactsScreen({ navigation }) {
     svgContainer: {
       position: 'relative',
       bottom: 0,
-      top: 30
+      top: 180
     },
     header: {
         textAlign: 'center',
-        bottom: 360,
+        bottom: 205,
         fontSize: 30,
         color: 'white',
         fontWeight: 'bold'
     },
     subheader: {
         textAlign: 'center',
-        bottom: 350,
+        bottom: 195,
         fontSize: 18,
         color: 'white',
     },
@@ -103,7 +101,8 @@ export default function ImpactsScreen({ navigation }) {
         borderRadius: 10,
         marginBottom: 30,
         width: '80%',
-        height: 70
+        height: 70,
+        top: 150
     },
     tipText: {
         fontSize: 18,

@@ -12,11 +12,8 @@ import UserHomeScreen from './screens/UserHomeScreen'
 
 // Screen names
 
-const detailsName = "Details";
-const settingsName = "Settings";
 const surveysName = "Surveys";
 const homeName = "Home";
-const logoutName = "Logout";
 
 const Tab = createBottomTabNavigator();
 
