@@ -1,8 +1,8 @@
 export default [
     {
         id:'1',
-        title:'Quick & Easy payments',
-        description:'grow your bsinies',
+        title:'Green',
+        description:'Green living green green',
         image: require('./assets/images/bunny.png'),
     },
     {

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { View, Text, StyleSheet, FlatList, Animated } from "react-native";
+import { View, Text, StyleSheet, FlatList, Animated, ImageBackground } from "react-native";
 import slides from '../slides';
 import OnboardingItem from '../components/OnboardingItem';
 
@@ -15,6 +15,7 @@ export default Onboarding = () => {
   const slidesRef = useRef(null);
 
   return (
+    <ImageBackground source={require('../assets/onboarding_bg.png')} style={styles.backgroundImage}>
     <View style={styles.container}>
       <View style={{ flex: 3 }}>
         <FlatList
@@ -35,6 +36,7 @@ export default Onboarding = () => {
         />
       </View>
     </View>
+    </ImageBackground>
   );
 }
 
@@ -44,6 +46,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  backgroundImage: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+    },
 });
 
 

@@ -30,10 +30,10 @@ const MainContainerUser = () => {
       <Tab.Navigator
         initialRouteName={homeName}
         screenOptions={({ route }) => ({
-          // headerShown: false,
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             let rn = route.name;
+
 
             if (rn === feedbackName) {
               iconName = focused ? 'happy' : 'happy-outline';
@@ -54,10 +54,10 @@ const MainContainerUser = () => {
       >
         <Tab.Screen
           name={homeName}
-          component={ImpactsScreen}
+          component={UserHomeScreen}
           options={{
             title: homeName,
-            headerTitleContainerStyle: { marginTop: 0 }, // Adjust the marginTop value
+            headerTitleContainerStyle: { marginTop: 0, marginBottom: 10 }, // Adjust the marginTop value
             headerTitleStyle: { fontSize: 16 } // Adjust the font size as needed
           }}
         />
