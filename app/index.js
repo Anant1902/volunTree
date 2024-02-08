@@ -4,7 +4,10 @@ import MainContainerUser from '../navigation/MainContainerUser';
 
 
 export default function App() {
+
   const page = "admi";
-  return page === "admin" ? <MainContainerAdmin /> : <MainContainerUser />;
+  return (
+    page === "admin" ? <MainContainerAdmin /> : <MainContainerUser />
+  ) 
   
 }

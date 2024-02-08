@@ -6,17 +6,16 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 // Screens
 
 
-import AttendanceScreen from './screens/AttendanceScreen';
+import FeedbackScreen from './screens/FeedbackScreen';
 import ImpactsScreen from './screens/ImpactsScreen';
-import LogoutScreen from './screens/LogoutScreen';
+import LogoutScreen from './screens/SettingScreen';
 
 // Screen names
 
 const detailsName = "Details";
 const settingsName = "Settings";
-const attendanceName = "Attendance";
-const impactsName = "Impacts";
-const logoutName = "Logout";
+const activitiesName = "Activities";
+const homeName = "Home";
 
 const Tab = createBottomTabNavigator();
 
@@ -24,18 +23,18 @@ const MainContainerAdmin = () => {
   return (
 
       <Tab.Navigator
-        initialRouteName={impactsName}
+        initialRouteName={homeName}
         screenOptions={({ route }) => ({
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             let rn = route.name;
 
-            if (rn === attendanceName) {
-              iconName = focused ? 'home' : 'home-outline';
-            } else if (rn === impactsName) {
+            if (rn === activitiesName) {
               iconName = focused ? 'list' : 'list-outline';
-            } else if (rn === logoutName) {
+            } else if (rn === homeName) {
+              iconName = focused ? 'home' : 'home-outline';
+            } else if (rn === settingsName) {
               iconName = focused ? 'settings' : 'settings-outline';
             }
 
@@ -50,29 +49,29 @@ const MainContainerAdmin = () => {
         }}
       >
         <Tab.Screen
-          name={impactsName}
+          name={homeName}
           component={ImpactsScreen}
           options={{
-            title: impactsName,
+            title: homeName,
             headerTitleContainerStyle: { marginTop: 0 }, // Adjust the marginTop value
             headerTitleStyle: { fontSize: 16 } // Adjust the font size as needed
           }}
         />
         <Tab.Screen
-          name={attendanceName}
-          component={AttendanceScreen}
+          name={activitiesName}
+          component={FeedbackScreen}
           options={{
-            title: attendanceName,
+            title: activitiesName,
             headerTitleContainerStyle: { marginTop: 0 }, // Adjust the marginTop value
             headerTitleStyle: { fontSize: 16 } // Adjust the font size as needed
           }}
         />
         
         <Tab.Screen
-          name={logoutName}
+          name={settingsName}
           component={LogoutScreen}
           options={{
-            title: logoutName,
+            title: settingsName,
             headerTitleContainerStyle: { marginTop: 0 }, // Adjust the marginTop value
             headerTitleStyle: { fontSize: 16 } // Adjust the font size as needed
           }}
