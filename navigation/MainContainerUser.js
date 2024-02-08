@@ -5,17 +5,17 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // Screens
 
-
 import AttendanceScreen from './screens/AttendanceScreen';
 import ImpactsScreen from './screens/ImpactsScreen';
 import LogoutScreen from './screens/LogoutScreen';
+import UserHomeScreen from './screens/UserHomeScreen'
 
 // Screen names
 
 const detailsName = "Details";
 const settingsName = "Settings";
-const attendanceName = "Attendance";
-const impactsName = "Impacts";
+const surveysName = "Surveys";
+const homeName = "Home";
 const logoutName = "Logout";
 
 const Tab = createBottomTabNavigator();
@@ -24,16 +24,17 @@ const MainContainerUser = () => {
   return (
 
       <Tab.Navigator
-        initialRouteName={impactsName}
+        initialRouteName={homeName}
         screenOptions={({ route }) => ({
+          headerShown: false,
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             let rn = route.name;
 
-            if (rn === attendanceName) {
-              iconName = focused ? 'home' : 'home-outline';
-            } else if (rn === impactsName) {
+            if (rn === surveysName) {
               iconName = focused ? 'list' : 'list-outline';
+            } else if (rn === homeName) {
+              iconName = focused ? 'home' : 'home-outline';
             } 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -46,19 +47,19 @@ const MainContainerUser = () => {
         }}
       >
         <Tab.Screen
-          name={impactsName}
-          component={ImpactsScreen}
+          name={homeName}
+          component={UserHomeScreen}
           options={{
-            title: impactsName,
-            headerTitleContainerStyle: { marginTop: 0 }, // Adjust the marginTop value
+            title: homeName,
+            headerTitleContainerStyle: { marginTop: 0, marginBottom: 10 }, // Adjust the marginTop value
             headerTitleStyle: { fontSize: 16 } // Adjust the font size as needed
           }}
         />
         <Tab.Screen
-          name={attendanceName}
+          name={surveysName}
           component={AttendanceScreen}
           options={{
-            title: attendanceName,
+            title: surveysName,
             headerTitleContainerStyle: { marginTop: 0 }, // Adjust the marginTop value
             headerTitleStyle: { fontSize: 16 } // Adjust the font size as needed
           }}
