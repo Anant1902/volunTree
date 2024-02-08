@@ -5,7 +5,9 @@ import Onboarding from '../../components/Onboarding';
 export default function AttendanceScreen({ navigation }) {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Onboarding/>
+            <Text>
+                attendance
+            </Text>
         </View>
     );
  }

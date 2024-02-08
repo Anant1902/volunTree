@@ -1,45 +1,14 @@
 import * as React from 'react';
-import MainContainer from '../navigation/MainContainer';
+import MainContainerAdmin from '../navigation/MainContainerAdmin';
+import MainContainerUser from '../navigation/MainContainerUser';
 import Onboarding from '../components/Onboarding';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
 
+
 export default function App() {
-  return(
-    <MainContainer/>
-  );
+  const page = "admin";
+  return page === "admin" ? <MainContainerAdmin /> : <MainContainerUser />;
+  
 }
-
-
-// export default function App() {
-//   return(
-//     <View style={styles.container}>
-//       <MainContainer/>
-//     </View>
-
-
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
-
-
-
-
-// export default function App() {
-
-//   return (
-//     <View style={styles.container}>
-//       <Onboarding />
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
