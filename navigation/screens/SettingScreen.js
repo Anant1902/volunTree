@@ -5,7 +5,7 @@ export default function LogoutScreen({ navigation }) {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>
-                Logout
+                Setting
             </Text>
         </View>
     );
