@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
-import { stnQuestions, fluteWorkshopQuestions }  from '../data/SurveyQuestions';
 
 // Mock data for todo feedbacks
 const feedbacks = [
@@ -9,14 +8,13 @@ const feedbacks = [
   // Add more feedback items as needed
 ];
 
-export default function FeedbackScreen({ navigation }) {
-    // Function to handle feedback press
-    const onFeedbackPress = (feedback) => {
-        console.log(feedback)
-        const questions = feedback.title == "Streaming Through Nature" ? stnQuestions : fluteWorkshopQuestions;
-        // Navigate to Feedback Detail Screen with the feedback's details
-        // Assuming the detail screen is named 'FeedbackDetail'
-        navigation.navigate('FeedbackDetailScreen', { screen: 'FeedbackDetailScreen', params: { questions: questions, title: feedback.title} });
+
+
+export default function AttendanceScreen({ navigation }) {
+
+
+    const onFeedbackPress = () => {
+        navigation.navigate('AttendanceNatureScreen');
     };
 
     // Render a single feedback item

@@ -9,14 +9,19 @@ export const RootNavigator = () => {
   const { user } = React.useContext(AuthContext);
 
   return (
+    // <NavigationContainer>
+    //   {!user ? (
+    //     <AuthStack />
+    //   ) : user.role == "Admin" ? (
+    //     <AdminTab />
+    //   ) : (
+    //     <UserTab />
+    //   )}
+    // </NavigationContainer>
     <NavigationContainer>
-      {!user ? (
-        <AuthStack />
-      ) : user.role == "Admin" ? (
-        <AdminTab />
-      ) : (
-        <UserTab />
-      )}
+      <AdminTab/>
+      {/* <UserTab /> */}
     </NavigationContainer>
+    
   );
 };
