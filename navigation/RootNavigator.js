@@ -45,6 +45,15 @@ export const RootNavigator = () => {
   }
 
   return (
+    // <NavigationContainer>
+    //   {!user ? (
+    //     <AuthStack />
+    //   ) : user.role == "Admin" ? (
+    //     <AdminTab />
+    //   ) : (
+    //     <UserTab />
+    //   )}
+    // </NavigationContainer>
     <NavigationContainer>
       {!user || !userData ? (
         <AuthStack />
@@ -54,5 +63,6 @@ export const RootNavigator = () => {
         <UserTab />
       )}
     </NavigationContainer>
+    
   );
 };

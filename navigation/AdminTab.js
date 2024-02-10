@@ -6,8 +6,10 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 // Screens
 
 import FeedbackScreen from "../screens/FeedbackScreen";
+import FeedbackNavigator from "../screens/FeedbackNavigator";
 import ImpactsScreen from "../screens/ImpactsScreen";
 import LogoutScreen from "../screens/SettingScreen";
+import AttendanceNavigator from "../screens/AttendanceNavigator";
 
 // Screen names
 
@@ -15,6 +17,7 @@ const detailsName = "Details";
 const settingsName = "Settings";
 const activitiesName = "Activities";
 const homeName = "Home";
+const attendanceName = "Attendance";
 
 const Tab = createBottomTabNavigator();
 
@@ -56,9 +59,9 @@ const AdminTab = () => {
       />
       <Tab.Screen
         name={activitiesName}
-        component={FeedbackScreen}
+        component={AttendanceNavigator}
         options={{
-          title: activitiesName,
+          title: attendanceName,
           headerTitleContainerStyle: { marginTop: 0 }, // Adjust the marginTop value
           headerTitleStyle: { fontSize: 16 }, // Adjust the font size as needed
         }}
