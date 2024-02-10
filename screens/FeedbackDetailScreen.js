@@ -1,6 +1,20 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
+import { collection, addDoc } from 'firebase/firestore';
+import { firebaseDB } from '../config/firebaseConfig';
+
+const userCollectionRef = collection(firebaseDB, 'responses');
+
+// Add a new document with a generated id.
+const addResponseData = async (responseData) => {
+  try {
+    const docRef = await addDoc(userCollectionRef, responseData);
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
 
 function FeedbackDetailScreen({ route, navigation }) {
   const { questions, title } = route.params.params;
@@ -22,6 +36,17 @@ function FeedbackDetailScreen({ route, navigation }) {
       Grateful: calculateAverage(responses.slice(12, 15)),
     };
     console.log('Averages:', averages);
+    addResponseData({
+      user_id: 1,
+      activity_id: 1,
+      giving_avg: averages.Giving,
+      gracious_avg: averages.Gracious,
+      grateful_avg: averages.Grateful,
+      green_avg: averages.Green,
+      grounded_avg: averages.Grounded,
+      completed: true,
+      hours_spent: 5
+    });
     // Placeholder for what to do next with averages
   };
 

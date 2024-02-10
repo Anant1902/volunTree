@@ -10,14 +10,27 @@ import React from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { firebaseAuth } from "../config/firebaseConfig";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { KeyboardAvoidingView } from "react-native";
+import { collection, addDoc } from 'firebase/firestore';
+import { firebaseDB } from "../config/firebaseConfig";
 
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = React.useState("");
+  const [displayName, setName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const auth = firebaseAuth;
+  const userCollectionRef = collection(firebaseDB, 'users');
+
+  const addUserData = async (userData) => {
+    try {
+      const docRef = await addDoc(userCollectionRef, userData);
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
 
   const signUp = async () => {
     setLoading(true);
@@ -27,7 +40,15 @@ const SignupScreen = ({ navigation }) => {
         email,
         password
       );
-      console.log(response);
+      await updateProfile(response.user, {
+        displayName: displayName
+      });
+       addUserData({
+        email: email,
+        name: displayName,
+        type: 'volunteer',
+        volunteer_hours: 0
+      });
     } catch (e) {
       console.error(e);
       alert("Sign up failed: " + e.message);
@@ -37,6 +58,12 @@ const SignupScreen = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView behaviour="padding" style={styles.container}>
+      <TextInput
+        style={styles.input}
+        value={displayName}
+        placeholder="Name"
+        onChangeText={setName}
+      />
       <TextInput
         style={styles.input}
         value={email}
