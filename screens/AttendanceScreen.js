@@ -13,8 +13,8 @@ const feedbacks = [
 export default function AttendanceScreen({ navigation }) {
 
 
-    const onFeedbackPress = () => {
-        navigation.navigate('AttendanceNatureScreen');
+    const onFeedbackPress = (item) => {
+        navigation.navigate('AttendanceNatureScreen', { title: item.title });
     };
 
     // Render a single feedback item

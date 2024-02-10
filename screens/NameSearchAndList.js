@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, FlatList, TouchableOpacity, Button } from 'react-native';
+import { addDoc, collection } from 'firebase/firestore';
+import { firebaseDB } from '../config/firebaseConfig'; // Adjust the import path as necessary
 
-const NameSearchAndList = ({ data }) => {
+const NameSearchAndList = ({ data, userEmail, activityName }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedNames, setSelectedNames] = useState([]);
-
   // Function to handle search input
   const handleSearch = (text) => {
     setSearchQuery(text);
@@ -12,8 +13,11 @@ const NameSearchAndList = ({ data }) => {
 
   // Function to handle adding a name to the list
   const handleAddName = (name) => {
-    setSelectedNames([...selectedNames, name]);
+    if (!selectedNames.includes(name)) {
+      setSelectedNames([...selectedNames, name]);
+    }
   };
+
 
   // Filter names based on search query
   const filteredNames = data.filter((name) =>
@@ -26,7 +30,7 @@ const NameSearchAndList = ({ data }) => {
       <Text>{item}</Text>
     </TouchableOpacity>
   );
-
+  
   // Render the component
   return (
     <View style={{ flex: 1, padding: 10 }}>
@@ -47,7 +51,7 @@ const NameSearchAndList = ({ data }) => {
       />
 
       {/* Selected names list */}
-      <View style={{ marginTop: 20 }}>
+      <View style={{ marginBottom: 20 }}>
         <Text>Selected Names:</Text>
         <FlatList
           data={selectedNames}

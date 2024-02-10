@@ -11,8 +11,12 @@ import {
 import Onboarding from "../components/Onboarding";
 import SvgExample from "../components/svgExample";
 import { StatusBar } from "expo-status-bar";
+import { AuthContext } from "../providers/AuthProvider";
+import { useContext } from "react";
 
 export default function UserHomeScreen({ navigation }) {
+  const { user } = useContext(AuthContext);
+
   const renderTrees = (numTrees) => {
     const gridWidth = 315;
     const gridHeight = 300;
@@ -58,8 +62,8 @@ export default function UserHomeScreen({ navigation }) {
           <SvgExample />
           {renderTrees(10)}
         </View>
-        <Text style={styles.header}>Hi xx,</Text>
-        <Text style={styles.subheader}>You have spent 10 hours with GUI!</Text>
+        <Text style={styles.header}>Hi {user.displayName},</Text>
+        <Text style={styles.subheader}>You have spent {user.volunteer_hours} hours with GUI!</Text>
         <View style={styles.tipContainer}>
           <Text style={styles.tipText}>Tip of the day!</Text>
           <Text style={styles.tipSubText}> Apples are oranges </Text>
