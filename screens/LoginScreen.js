@@ -11,7 +11,8 @@ import { firebaseAuth } from "../config/firebaseConfig";
 import { TextInput } from "react-native-gesture-handler";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { KeyboardAvoidingView } from "react-native";
+import { KeyboardAvoidingView, Image } from "react-native";
+import logo from "../assets/logo.svg";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = React.useState("");
@@ -33,6 +34,7 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView behaviour="padding" style={styles.container}>
+      <Image source={logo} style={{ width: 200, height: 200 }} />
       <TextInput
         style={styles.input}
         value={email}
