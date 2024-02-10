@@ -1,11 +1,21 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ActivityIndicator, Button, KeyboardAvoidingView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  Button,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableOpacity,
+} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Picker } from '@react-native-picker/picker';
+import { Picker } from "@react-native-picker/picker";
 import { firebaseAuth } from "../config/firebaseConfig";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc } from "firebase/firestore";
 import { firebaseDB } from "../config/firebaseConfig";
+import { useHeaderHeight } from "@react-navigation/elements";
 
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -13,9 +23,10 @@ const SignupScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [accountType, setAccountType] = useState("volunteer");
   const [loading, setLoading] = useState(false);
+  const height = useHeaderHeight();
 
   const auth = firebaseAuth;
-  const userCollectionRef = collection(firebaseDB, 'users');
+  const userCollectionRef = collection(firebaseDB, "users");
 
   const addUserData = async (userData) => {
     try {
@@ -35,13 +46,13 @@ const SignupScreen = ({ navigation }) => {
         password
       );
       await updateProfile(response.user, {
-        displayName: displayName
+        displayName: displayName,
       });
       addUserData({
         email: email,
         name: displayName,
         type: accountType,
-        volunteer_hours: 0
+        volunteer_hours: 0,
       });
       // Navigate to the login screen or home screen after successful signup
     } catch (e) {
@@ -52,7 +63,11 @@ const SignupScreen = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView behaviour="padding" style={styles.container}>
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={height + 10}
+      behavior={Platform.OS === "ios" ? "padding" : null}
+      style={styles.container}
+    >
       <TextInput
         style={styles.input}
         value={displayName}
@@ -85,7 +100,9 @@ const SignupScreen = ({ navigation }) => {
       {loading ? (
         <ActivityIndicator />
       ) : (
-        <Button title="Submit" onPress={signUp} color={"#000000"} />
+        <TouchableOpacity onPress={signUp} style={styles.button}>
+          <Text>Submit</Text>
+        </TouchableOpacity>
       )}
     </KeyboardAvoidingView>
   );
@@ -98,15 +115,26 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   input: {
-    marginVertical: 10,
+    margin: 10,
     height: 40,
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
+    width: "100%",
+    alignSelf: "center",
+  },
+  button: {
+    alignSelf: "center",
+    alignItems: "center",
+    backgroundColor: "#b1f3b1",
+    padding: 10,
+    width: "60%",
+    borderRadius: 20,
+    marginVertical: 10,
   },
   label: {
     fontSize: 16,
-    color: '#000',
+    color: "#000",
     paddingLeft: 10,
     marginTop: 20,
     marginBottom: 5,

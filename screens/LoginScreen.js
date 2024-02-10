@@ -5,23 +5,26 @@ import {
   ActivityIndicator,
   Button,
   Keyboard,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import { firebaseAuth } from "../config/firebaseConfig";
 import { TextInput } from "react-native-gesture-handler";
+import { useHeaderHeight } from "@react-navigation/elements";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { KeyboardAvoidingView, Image } from "react-native";
-import logo from "../assets/logo.svg";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const auth = firebaseAuth;
+  const height = useHeaderHeight();
 
   const signIn = async () => {
-    
     setLoading(true);
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
@@ -34,8 +37,13 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView behaviour="padding" style={styles.container}>
-      <Image source={logo} style={{ width: 200, height: 200 }} />
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={height + 10}
+      behavior={Platform.OS === "ios" ? "padding" : null}
+      style={styles.container}
+    >
+      <Image source={require("../assets/logo.png")} style={styles.logo} />
+      <Text style={styles.name}>volunTree</Text>
       <TextInput
         style={styles.input}
         value={email}
@@ -53,12 +61,15 @@ const LoginScreen = ({ navigation }) => {
         <ActivityIndicator />
       ) : (
         <>
-          <Button title="Submit" onPress={signIn} color={"#000000"} />
-          <Button
-            title="No account? Create one here"
+          <TouchableOpacity onPress={signIn} style={styles.button}>
+            <Text>Submit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => navigation.navigate("Signup")}
-            color={"#000000"}
-          />
+            style={styles.button}
+          >
+            <Text>No account?</Text>
+          </TouchableOpacity>
         </>
       )}
     </KeyboardAvoidingView>
@@ -68,7 +79,12 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
+  },
+  name: {
+    fontSize: 40,
+    textAlign: "center",
+    marginVertical: 10,
   },
   input: {
     margin: 10,
@@ -76,15 +92,26 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
+    width: "90%",
+    alignSelf: "center",
   },
-  submitButton: {
-    backgroundColor: "#7a42f4",
+  button: {
+    alignSelf: "center",
+    alignItems: "center",
+    backgroundColor: "#b1f3b1",
     padding: 10,
-    margin: 15,
-    height: 40,
+    width: "60%",
+    borderRadius: 20,
+    marginVertical: 10,
   },
   submitButtonText: {
     color: "white",
+  },
+  logo: {
+    width: 200,
+    height: 200,
+    alignSelf: "center",
+    marginTop: 50,
   },
 });
 
